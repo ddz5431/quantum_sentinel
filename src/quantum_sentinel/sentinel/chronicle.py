@@ -17,9 +17,13 @@ class SentinelAligner:
         self.phase_log = []
 
     def calculate_alignment_distance(self, logits: torch.FloatTensor):
-        """Calculates Shannon Entropy."""
+        """Calculates Shannon Entropy with numerical stability using log_softmax."""
+        # Grounding the distribution to prevent log(0) instability
         probs = torch.softmax(logits, dim=-1)
-        entropy = -torch.sum(probs * torch.log(probs + 1e-10), dim=-1)
+        log_probs = torch.log_softmax(logits, dim=-1)
+
+        # Entropy as a measure of Entanglement
+        entropy = -torch.sum(probs * log_probs, dim=-1)
         return torch.mean(entropy).item()
 
     def record_multiverse_step(self, step, realities, is_rejected=False):
@@ -39,14 +43,19 @@ class SentinelAligner:
             print(f"Step {log['step']} {marker}: '{primary['token']}' | Ghosts: {ghosts}")
 
     def record_phase_transition(self, step: int, current_h: float, future_h: float, delta_h: float, limit: float):
-        """Logs the entropy velocity to detect logical decoherence events."""
+        """Logs the entropy velocity while filtering for numerical singularities."""
+        # 🌀 Numerical Grounding: If future_h failed, we treat it as maximum decoherence
+        # rather than a NaN to preserve the Peak Delta H signature.
+        safe_future_h = future_h if not torch.isnan(torch.tensor(future_h)) else 1.0
+        safe_delta_h = safe_future_h - current_h
+
         entry = {
             "step": step,
             "current_entropy": round(current_h, 4),
-            "future_entropy": round(future_h, 4),
-            "velocity": round(delta_h, 4),
+            "future_entropy": round(safe_future_h, 4),
+            "velocity": round(safe_delta_h, 4),
             "threshold": round(limit, 4),
-            "is_divergent": delta_h > limit
+            "is_divergent": safe_delta_h > limit
         }
         self.phase_log.append(entry)
 

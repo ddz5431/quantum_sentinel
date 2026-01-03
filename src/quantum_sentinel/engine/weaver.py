@@ -50,9 +50,11 @@ class BacktrackingWeaver:
                 logits = outputs.logits[:, -1, :]
                 temp_kv = outputs.past_key_values
 
+                # STABLE LOGIC: Use log_softmax to prevent NaN
                 probs = torch.softmax(logits, dim=-1)
-                # Entropy serves as a measure of correlations/entanglement
-                h = -torch.sum(probs * torch.log(probs + 1e-10), dim=-1).mean().item()
+                log_probs = torch.log_softmax(logits, dim=-1)
+                h = -torch.sum(probs * log_probs, dim=-1).mean().item()
+
                 total_future_h += h
 
                 next_tok = torch.argmax(logits, dim=-1, keepdim=True)
@@ -74,10 +76,10 @@ class BacktrackingWeaver:
         current_ids = input_ids.clone()
         past_key_values = None
         backtrack_count = 0
+        # Numerical grounding for entropy normalization
         max_h = torch.log(torch.tensor(self.model.config.vocab_size)).item()
 
         self.baseline_h_flow = []
-
         ghost_ids = []  # Tracks suppressed 'Truth' candidates
 
         for i in range(max_tokens):
@@ -87,19 +89,17 @@ class BacktrackingWeaver:
                 use_cache=True
             )
             logits = outputs.logits[:, -1, :]
-
-            # Record current logical branches (Multiverse Trace)
             multiverse_state = self._get_multiverse_density(logits)
 
             if i == 0:
                 self.reference_distribution = torch.softmax(logits, dim=-1).detach()
 
-            # Normalized Shannon Entropy as a proxy for Entanglement
+            # Fix: Epsilon grounding to prevent 'nan' during phase transitions
             current_h = self.sentinel.calculate_alignment_distance(logits) / max_h
 
-            # Dynamic Threshold Calibration (Adaptive Divergence Limit)
+            # Unified Threshold Calibration
             if i < 3:
-                self.baseline_h_flow.append(current_h)
+                self.baseline_h_flow.append(current_h) # Record early stability
                 divergence_limit = 0.15
             else:
                 diffs = [abs(self.baseline_h_flow[j] - self.baseline_h_flow[j - 1])
@@ -113,19 +113,24 @@ class BacktrackingWeaver:
             while len(forbidden_ids) < 5:
                 processed_logits = self.processor(logits, forbidden_ids, current_ids)
 
-                # 🌀 GROUND STATE INJECTION: Boost suppressed ghost tokens after a reset
+                # 🌀 ADAPTIVE SCALING: Adjust 'Injection Energy' based on current Entanglement (H)
+                # High noise (current_h > 0.3) triggers a stronger nudge.
+                injection_power = 3.5 if current_h > 0.3 else 2.0
+
+                # 🌀 GROUND STATE INJECTION
                 if len(ghost_ids) > 0 and past_key_values is None:
-                    processed_logits[..., ghost_ids] += 2.0 # Injection boost
-                    logger.info(f"✨ [INJECTION] Boosting Ghost IDs: {self.tokenizer.decode(ghost_ids)}")
+                    processed_logits[..., ghost_ids] += injection_power
+                    logger.info(
+                        f"✨ [INJECTION] Power: {injection_power} | Ghost IDs: {self.tokenizer.decode(ghost_ids)}")
 
                 candidate_token = torch.multinomial(torch.softmax(processed_logits, dim=-1), 1).item()
 
-                # Quantum Probe: Evaluate future stability
+                # Quantum Probe for future entropy velocity
                 future_h = self._get_future_entropy(current_ids, candidate_token, outputs.past_key_values) / max_h
                 delta_h = future_h - current_h
 
                 if delta_h > divergence_limit:
-                    # Capture the current 'Ghost' states before rejection
+                    # Capture Top-3 'Ghost' paths before rejection
                     _, top_indices = torch.topk(torch.softmax(logits, dim=-1), k=3)
                     ghost_ids.extend(top_indices[0].tolist())
 
@@ -135,28 +140,24 @@ class BacktrackingWeaver:
                     self.sentinel.record_phase_transition(i, current_h, future_h, delta_h, divergence_limit)
                     self.sentinel.record_multiverse_step(i, multiverse_state, is_rejected=True)
 
-                    # 🌀 QUANTUM RESET MECHANISM
                     forbidden_ids.append(candidate_token)
                     backtrack_count += 1
 
-                    # If trapped in a decoherence loop (5 failures), flush the 'environment'
                     if len(forbidden_ids) >= 5:
                         logger.warning("🔥 [TOTAL DECOHERENCE] Performing Multiverse Flush + Injection.")
                         past_key_values = None  # Unitary Reset
                         self.processor.temperature += 0.05  # Thermal Damping
                         torch.cuda.empty_cache()
-                        break  # Re-run from base prompt with ghost_ids active
+                        break
 
                     torch.cuda.empty_cache()
-                    logits = logits * 1.1  # Standard thermal nudge
+                    logits = logits * 1.1
                 else:
-                    # Success: Move toward deterministic resolution
-                    ghost_ids = []  # Clear ghosts upon successful transition
-
+                    # Success: Path resolution
+                    ghost_ids = []
                     self.sentinel.record_phase_transition(i, current_h, future_h, delta_h, divergence_limit)
                     self.sentinel.record_multiverse_step(i, multiverse_state, is_rejected=False)
                     self.sentinel.archive_step(0, candidate_token, current_h)
-
                     self.baseline_h_flow.append(current_h)
                     next_token = torch.tensor([[candidate_token]]).to(current_ids.device)
                     break
@@ -167,7 +168,7 @@ class BacktrackingWeaver:
             current_ids = torch.cat([current_ids, next_token], dim=-1)
             past_key_values = outputs.past_key_values
 
-            # Logical Stability Check (KL Divergence Stop)
+            # Logical Stability Stop
             curr_prob = torch.softmax(logits, dim=-1)
             kl_div = torch.sum(self.reference_distribution * (
                     torch.log(self.reference_distribution + 1e-10) - torch.log(curr_prob + 1e-10)
@@ -177,3 +178,4 @@ class BacktrackingWeaver:
                 break
 
         return {"sequences": current_ids, "backtracks": backtrack_count}
+
