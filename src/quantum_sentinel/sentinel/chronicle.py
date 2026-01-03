@@ -2,9 +2,9 @@ import torch
 import logging
 import json
 from pathlib import Path
-from typing import Dict, List
 
 logger = logging.getLogger(__name__)
+
 
 class SentinelAligner:
     """Monitors model coherence using normalized Shannon Entropy."""
@@ -13,32 +13,72 @@ class SentinelAligner:
         self.task_type = task_type
         self.chronicle = [[]]
         self.failed_thoughts = []
+        # Initialize phase log for experimental tracking
+        self.phase_log = []
 
     def calculate_alignment_distance(self, logits: torch.FloatTensor):
-        """Calculates Shannon Entropy. Normalized version used in Weaver."""
+        """Calculates Shannon Entropy."""
         probs = torch.softmax(logits, dim=-1)
         entropy = -torch.sum(probs * torch.log(probs + 1e-10), dim=-1)
         return torch.mean(entropy).item()
 
+    def record_multiverse_step(self, step, realities, is_rejected=False):
+        if not hasattr(self, 'multiverse_log'): self.multiverse_log = []
+        self.multiverse_log.append({
+            "step": step,
+            "realities": realities,
+            "rejected_event": is_rejected
+        })
+
+    def print_multiverse_report(self):
+        print("\n🌌 [MULTIVERSE TRACE] Evidence of Deterministic Branching:")
+        for log in self.multiverse_log:
+            marker = "❌ REJECTED" if log['rejected_event'] else "✅ RESOLVED"
+            primary = log['realities'][0]
+            ghosts = ", ".join([f"{r['token']} ({r['prob']:.2f})" for r in log['realities'][1:3]])
+            print(f"Step {log['step']} {marker}: '{primary['token']}' | Ghosts: {ghosts}")
+
+    def record_phase_transition(self, step: int, current_h: float, future_h: float, delta_h: float, limit: float):
+        """Logs the entropy velocity to detect logical decoherence events."""
+        entry = {
+            "step": step,
+            "current_entropy": round(current_h, 4),
+            "future_entropy": round(future_h, 4),
+            "velocity": round(delta_h, 4),
+            "threshold": round(limit, 4),
+            "is_divergent": delta_h > limit
+        }
+        self.phase_log.append(entry)
+
     def surgical_chronicle_slice(self, thread_idx: int, steps: int = 1):
-        """Moves rejected tokens from active chronicle to failed_thoughts archive."""
+        """
+        Surgically removes the last N steps from the active logical thread.
+        Used when the Sentinel detects a delayed decoherence event.
+        """
         if thread_idx < len(self.chronicle):
             for _ in range(steps):
                 if self.chronicle[thread_idx]:
-                    bad_thought = self.chronicle[thread_idx].pop()
-                    self.failed_thoughts.append(bad_thought)
-            logger.info("✂️ Chronicle: Divergent thought moved to archive.")
+                    # Move 'Decohered' thought to the failed archive for research analysis
+                    self.failed_thoughts.append(self.chronicle[thread_idx].pop())
+            logger.info(f"✂️ Removed {steps} step(s) from Thread {thread_idx} due to Decoherence.")
 
-    def archive_step(self, thread_idx: int, token_id: int, distance: float, is_candidate=False):
-        """Records a token. Set is_candidate=True for rejected tokens."""
+    def archive_step(self, thread_idx: int, token_id: int, distance: float, is_rejected=False):
+        """
+        Records a token into the chronicle.
+        If is_rejected=True, it bypasses the active thread and goes to failed_thoughts.
+        """
         entry = {
             "token": self.tokenizer.decode([token_id]),
             "token_id": token_id,
-            "dist_normalized": round(distance, 4)
+            "h_normalized": round(distance, 4)  # Renamed to reflect entropy (H)
         }
-        if is_candidate:
+
+        if is_rejected:
             self.failed_thoughts.append(entry)
         else:
+            # Ensure the thread exists before appending
+            while thread_idx >= len(self.chronicle):
+                self.chronicle.append([])
             self.chronicle[thread_idx].append(entry)
 
     def export_research_log(self, path="results/alignment_session.json"):
@@ -47,7 +87,11 @@ class SentinelAligner:
         data = {
             "final_thread": self.chronicle,
             "failed_attempts": self.failed_thoughts,
-            "metrics": {"backtracks": len(self.failed_thoughts), "task": self.task_type}
+            "phase_transition_data": self.phase_log,
+            "metrics": {
+                "backtracks": len(self.failed_thoughts),
+                "task": self.task_type
+            }
         }
         with open(path, "w") as f:
             json.dump(data, f, indent=4)
