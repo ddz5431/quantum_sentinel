@@ -41,7 +41,7 @@ class ShannonObserver:
             "velocity": round(delta_h, 4),
             "abs_velocity": round(abs(delta_h), 4),  # ← OPTIONAL
             "threshold": round(limit, 4),
-            "is_violent": abs(delta_h) > limit  # ← Consider using abs()
+            "is_violent": abs(delta_h) > limit
         })
 
     def save_trace(self, model_name):
