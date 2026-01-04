@@ -1,0 +1,162 @@
+[
+    {
+        "step": 0,
+        "uncertainty": 0.139,
+        "velocity": 0.0,
+        "abs_velocity": 0.0,
+        "threshold": 0.2,
+        "is_violent": false
+    },
+    {
+        "step": 1,
+        "uncertainty": 0.048,
+        "velocity": -0.0909,
+        "abs_velocity": 0.0909,
+        "threshold": 0.2,
+        "is_violent": false
+    },
+    {
+        "step": 2,
+        "uncertainty": 0.0006,
+        "velocity": -0.0475,
+        "abs_velocity": 0.0475,
+        "threshold": 0.2,
+        "is_violent": false
+    },
+    {
+        "step": 3,
+        "uncertainty": 0.1451,
+        "velocity": 0.1446,
+        "abs_velocity": 0.1446,
+        "threshold": 0.1769,
+        "is_violent": false
+    },
+    {
+        "step": 4,
+        "uncertainty": 0.1348,
+        "velocity": -0.0103,
+        "abs_velocity": 0.0103,
+        "threshold": 0.1467,
+        "is_violent": false
+    },
+    {
+        "step": 5,
+        "uncertainty": 0.0461,
+        "velocity": -0.0887,
+        "abs_velocity": 0.0887,
+        "threshold": 0.1592,
+        "is_violent": false
+    },
+    {
+        "step": 6,
+        "uncertainty": 0.1606,
+        "velocity": 0.1145,
+        "abs_velocity": 0.1145,
+        "threshold": 0.1773,
+        "is_violent": false
+    },
+    {
+        "step": 7,
+        "uncertainty": 0.1973,
+        "velocity": 0.0367,
+        "abs_velocity": 0.0367,
+        "threshold": 0.1666,
+        "is_violent": false
+    },
+    {
+        "step": 8,
+        "uncertainty": 0.2036,
+        "velocity": 0.0064,
+        "abs_velocity": 0.0064,
+        "threshold": 0.1499,
+        "is_violent": false
+    },
+    {
+        "step": 9,
+        "uncertainty": 0.1868,
+        "velocity": -0.0169,
+        "abs_velocity": 0.0169,
+        "threshold": 0.1391,
+        "is_violent": false
+    },
+    {
+        "step": 10,
+        "uncertainty": 0.0146,
+        "velocity": -0.1722,
+        "abs_velocity": 0.1722,
+        "threshold": 0.1656,
+        "is_violent": true
+    },
+    {
+        "step": 11,
+        "uncertainty": 0.0,
+        "velocity": -0.0146,
+        "abs_velocity": 0.0146,
+        "threshold": 0.1548,
+        "is_violent": false
+    },
+    {
+        "step": 12,
+        "uncertainty": 0.2007,
+        "velocity": 0.2007,
+        "abs_velocity": 0.2007,
+        "threshold": 0.1815,
+        "is_violent": true
+    },
+    {
+        "step": 13,
+        "uncertainty": 0.0,
+        "velocity": -0.2007,
+        "abs_velocity": 0.2007,
+        "threshold": 0.2044,
+        "is_violent": false
+    },
+    {
+        "step": 14,
+        "uncertainty": 0.2392,
+        "velocity": 0.2392,
+        "abs_velocity": 0.2392,
+        "threshold": 0.2306,
+        "is_violent": true
+    },
+    {
+        "step": 15,
+        "uncertainty": 0.0,
+        "velocity": -0.2392,
+        "abs_velocity": 0.2392,
+        "threshold": 0.2536,
+        "is_violent": false
+    },
+    {
+        "step": 16,
+        "uncertainty": 0.2072,
+        "velocity": 0.2072,
+        "abs_velocity": 0.2072,
+        "threshold": 0.2691,
+        "is_violent": false
+    },
+    {
+        "step": 17,
+        "uncertainty": 0.2244,
+        "velocity": 0.0172,
+        "abs_velocity": 0.0172,
+        "threshold": 0.2566,
+        "is_violent": false
+    },
+    {
+        "step": 18,
+        "uncertainty": 0.0561,
+        "velocity": -0.1683,
+        "abs_velocity": 0.1683,
+        "threshold": 0.2652,
+        "is_violent": false
+    },
+    {
+        "step": 19,
+        "uncertainty": 0.0027,
+        "velocity": -0.0534,
+        "abs_velocity": 0.0534,
+        "threshold": 0.2586,
+        "is_violent": false
+    }
+]

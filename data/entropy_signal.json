@@ -1,0 +1,302 @@
+[
+    {
+        "id": "Recency-0",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 28. Fact 2: The value is now 10. Question: What was the ORIGINAL value? Answer:",
+        "target": "28"
+    },
+    {
+        "id": "Recency-1",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 48. Fact 2: The value is now 92. Question: What was the ORIGINAL value? Answer:",
+        "target": "48"
+    },
+    {
+        "id": "Recency-2",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 27. Fact 2: The value is now 10. Question: What was the ORIGINAL value? Answer:",
+        "target": "27"
+    },
+    {
+        "id": "Recency-3",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 17. Fact 2: The value is now 22. Question: What was the ORIGINAL value? Answer:",
+        "target": "17"
+    },
+    {
+        "id": "Recency-4",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 82. Fact 2: The value is now 66. Question: What was the ORIGINAL value? Answer:",
+        "target": "82"
+    },
+    {
+        "id": "Recency-5",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 40. Fact 2: The value is now 70. Question: What was the ORIGINAL value? Answer:",
+        "target": "40"
+    },
+    {
+        "id": "Recency-6",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 25. Fact 2: The value is now 69. Question: What was the ORIGINAL value? Answer:",
+        "target": "25"
+    },
+    {
+        "id": "Recency-7",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 56. Fact 2: The value is now 53. Question: What was the ORIGINAL value? Answer:",
+        "target": "56"
+    },
+    {
+        "id": "Recency-8",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 37. Fact 2: The value is now 39. Question: What was the ORIGINAL value? Answer:",
+        "target": "37"
+    },
+    {
+        "id": "Recency-9",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 46. Fact 2: The value is now 20. Question: What was the ORIGINAL value? Answer:",
+        "target": "46"
+    },
+    {
+        "id": "Recency-10",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 64. Fact 2: The value is now 36. Question: What was the ORIGINAL value? Answer:",
+        "target": "64"
+    },
+    {
+        "id": "Recency-11",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 15. Fact 2: The value is now 43. Question: What was the ORIGINAL value? Answer:",
+        "target": "15"
+    },
+    {
+        "id": "Recency-12",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 97. Fact 2: The value is now 56. Question: What was the ORIGINAL value? Answer:",
+        "target": "97"
+    },
+    {
+        "id": "Recency-13",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 27. Fact 2: The value is now 70. Question: What was the ORIGINAL value? Answer:",
+        "target": "27"
+    },
+    {
+        "id": "Recency-14",
+        "category": "Recency",
+        "prompt": "Fact 1: The value is 85. Fact 2: The value is now 19. Question: What was the ORIGINAL value? Answer:",
+        "target": "85"
+    },
+    {
+        "id": "Syllogism-0",
+        "category": "Syllogism",
+        "prompt": "All birds are animals. Tweety is animals. Is Tweety definitely a bird? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-1",
+        "category": "Syllogism",
+        "prompt": "All philosophers are mortal. Plato is mortal. Is Plato definitely a philosopher? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-2",
+        "category": "Syllogism",
+        "prompt": "All birds are animals. Tweety is animals. Is Tweety definitely a bird? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-3",
+        "category": "Syllogism",
+        "prompt": "All birds are animals. Tweety is animals. Is Tweety definitely a bird? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-4",
+        "category": "Syllogism",
+        "prompt": "All philosophers are mortal. Tweety is mortal. Is Tweety definitely a philosopher? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-5",
+        "category": "Syllogism",
+        "prompt": "All birds are animals. Socrates is animals. Is Socrates definitely a bird? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-6",
+        "category": "Syllogism",
+        "prompt": "All birds are animals. Rex is animals. Is Rex definitely a bird? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-7",
+        "category": "Syllogism",
+        "prompt": "All philosophers are mortal. Rex is mortal. Is Rex definitely a philosopher? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-8",
+        "category": "Syllogism",
+        "prompt": "All philosophers are mortal. Socrates is mortal. Is Socrates definitely a philosopher? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-9",
+        "category": "Syllogism",
+        "prompt": "All philosophers are mortal. Plato is mortal. Is Plato definitely a philosopher? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-10",
+        "category": "Syllogism",
+        "prompt": "All philosophers are mortal. Rex is mortal. Is Rex definitely a philosopher? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-11",
+        "category": "Syllogism",
+        "prompt": "All dogs are mammals. Socrates is mammals. Is Socrates definitely a dog? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-12",
+        "category": "Syllogism",
+        "prompt": "All dogs are mammals. Tweety is mammals. Is Tweety definitely a dog? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-13",
+        "category": "Syllogism",
+        "prompt": "All birds are animals. Plato is animals. Is Plato definitely a bird? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Syllogism-14",
+        "category": "Syllogism",
+        "prompt": "All philosophers are mortal. Rex is mortal. Is Rex definitely a philosopher? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Constraint-0",
+        "category": "Constraint",
+        "prompt": "Write a sentence about 'fire' using exactly 5 words:",
+        "target": "fire"
+    },
+    {
+        "id": "Constraint-1",
+        "category": "Constraint",
+        "prompt": "Write a sentence about 'earth' using exactly 4 words:",
+        "target": "earth"
+    },
+    {
+        "id": "Constraint-2",
+        "category": "Constraint",
+        "prompt": "Write a sentence about 'water' using exactly 6 words:",
+        "target": "water"
+    },
+    {
+        "id": "Constraint-3",
+        "category": "Constraint",
+        "prompt": "Write a sentence about 'fire' using exactly 5 words:",
+        "target": "fire"
+    },
+    {
+        "id": "Constraint-4",
+        "category": "Constraint",
+        "prompt": "Write a sentence about 'earth' using exactly 4 words:",
+        "target": "earth"
+    },
+    {
+        "id": "Constraint-5",
+        "category": "Constraint",
+        "prompt": "Write a sentence about 'water' using exactly 6 words:",
+        "target": "water"
+    },
+    {
+        "id": "Constraint-6",
+        "category": "Constraint",
+        "prompt": "Write a sentence about 'earth' using exactly 4 words:",
+        "target": "earth"
+    },
+    {
+        "id": "Constraint-7",
+        "category": "Constraint",
+        "prompt": "Write a sentence about 'earth' using exactly 4 words:",
+        "target": "earth"
+    },
+    {
+        "id": "Constraint-8",
+        "category": "Constraint",
+        "prompt": "Write a sentence about 'fire' using exactly 5 words:",
+        "target": "fire"
+    },
+    {
+        "id": "Constraint-9",
+        "category": "Constraint",
+        "prompt": "Write a sentence about 'water' using exactly 6 words:",
+        "target": "water"
+    },
+    {
+        "id": "Modus-0",
+        "category": "Modus",
+        "prompt": "Rule: If it rains, the ground is wet. Fact: The ground is NOT wet. Is it raining? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Modus-1",
+        "category": "Modus",
+        "prompt": "Rule: If it rains, the ground is wet. Fact: The ground is NOT wet. Is it raining? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Modus-2",
+        "category": "Modus",
+        "prompt": "Rule: If it rains, the ground is wet. Fact: The ground is NOT wet. Is it raining? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Modus-3",
+        "category": "Modus",
+        "prompt": "Rule: If it rains, the ground is wet. Fact: The ground is NOT wet. Is it raining? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Modus-4",
+        "category": "Modus",
+        "prompt": "Rule: If it rains, the ground is wet. Fact: The ground is NOT wet. Is it raining? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Modus-5",
+        "category": "Modus",
+        "prompt": "Rule: If it rains, the ground is wet. Fact: The ground is NOT wet. Is it raining? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Modus-6",
+        "category": "Modus",
+        "prompt": "Rule: If it rains, the ground is wet. Fact: The ground is NOT wet. Is it raining? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Modus-7",
+        "category": "Modus",
+        "prompt": "Rule: If it rains, the ground is wet. Fact: The ground is NOT wet. Is it raining? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Modus-8",
+        "category": "Modus",
+        "prompt": "Rule: If it rains, the ground is wet. Fact: The ground is NOT wet. Is it raining? Answer (Yes/No):",
+        "target": "No"
+    },
+    {
+        "id": "Modus-9",
+        "category": "Modus",
+        "prompt": "Rule: If it rains, the ground is wet. Fact: The ground is NOT wet. Is it raining? Answer (Yes/No):",
+        "target": "No"
+    }
+]
