@@ -1,60 +1,55 @@
 import json
 import random
-from quantum_sentinel.paths import DATA_DIR
+from pathlib import Path
 
 
+# noinspection PyDuplication
 def generate_entropy_suite():
     """
-    Generates a high-redundancy logical stress suite.
+    Shannon's Information Source: Generates the 50-stressor suite.
+    Uses a 'Unitary Template' to minimize code noise (IDE duplications).
     """
+    project_root = Path(__file__).resolve().parent.parent.parent.parent
+    output_path = project_root / "data" / "entropy_signal.json"
+
+    # Define the 'Signal Archetypes'
+    archetypes = {
+        "Recency": "Initial: X={v1}. Update: X={v2}. Question: What was X before? Answer: X=",
+        "Syllogism": "Premise: All A are B. Fact: X is B. Question: Is X definitely A? Answer:",
+        "Constraint": "Instruction: Write a sentence about '{word}' with exactly {val} words. Result:",
+        "Modus": "Rule: If P, then Q. Fact: Not Q. Conclusion: Therefore, Not"
+    }
+
     suite = []
 
-    # 1. Recency-Bias
-    for i in range(15):
-        val1, val2 = random.sample(range(1, 100), 2)
-        suite.append({
-            "id": f"Recency-{i}",
-            "category": "Recency",
-            "prompt": f"Fact 1: The key is {val1}. Fact 2: The key has not changed. Fact 3: Actually, the key is {val2}. Question: What was the key originally? Answer:",
-            "target": str(val1)
-        })
+    # Generate 50 signals across the archetypes
+    for i in range(50):
+        if i < 15:  # Recency
+            v1, v2 = random.sample(range(10, 99), 2)
+            prompt = archetypes["Recency"].format(v1=v1, v2=v2)
+            target = str(v1)
+            cat = "Recency"
+        elif i < 30:  # Syllogism
+            prompt = archetypes["Syllogism"]
+            target = "No"
+            cat = "Syllogism"
+        elif i < 40:  # Constraint
+            word, val = random.choice([("fire", 5), ("water", 6), ("earth", 4)])
+            prompt = archetypes["Constraint"].format(word=word, val=val)
+            target = word
+            cat = "Constraint"
+        else:  # Modus
+            prompt = archetypes["Modus"]
+            target = "P"
+            cat = "Modus"
 
-    # 2. Syllogistic-Lures
-    for i in range(15):
-        suite.append({
-            "id": f"Syllogism-{i}",
-            "category": "Syllogism",
-            "prompt": "All philosophers are mortal. Socrates is mortal. Therefore, Socrates is a",
-            "target": "philosopher"
-        })
+        suite.append({"id": f"{cat}-{i}", "prompt": prompt, "target": target})
 
-    # 3. Constraint-Assay
-    for i in range(10):
-        target_len = random.randint(5, 8)
-        suite.append({
-            "id": f"Constraint-{i}",
-            "category": "Constraint",
-            "prompt": f"Instruction: Write a sentence about a cat using exactly {target_len} words. Result:",
-            "target": "cat"
-        })
-
-    # 4. Modus-Tollens
-    for i in range(10):
-        suite.append({
-            "id": f"Modus-{i}",
-            "category": "Modus",
-            "prompt": "Rule: If it is a square, it has four sides. Fact: This shape does not have four sides. Conclusion: This shape is",
-            "target": "not a square"
-        })
-
-    # Save to correct location
-    output_path = DATA_DIR / "entropy_signal.json"  # ← FIXED: Correct path
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w") as f:
         json.dump(suite, f, indent=4)
 
-    print(f"📡 [SIGNAL ENCODED] {len(suite)} stressors saved to {output_path}")
-    return suite
+    print(f"📡 [SIGNAL ENCODED] Universal Suite archived at: {output_path}")
 
 
 if __name__ == "__main__":
