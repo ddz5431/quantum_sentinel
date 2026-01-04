@@ -1,10 +1,25 @@
 import torch
 import pandas as pd
 import json
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
 from quantum_sentinel.paths import DATA_DIR, ASSAYS_DIR
 from quantum_sentinel.core.shannon_observer import ShannonObserver
 from quantum_sentinel.core.unitary_weaver import UnitaryWeaver
-from transformers import AutoModelForCausalLM, AutoTokenizer
+
+
+def load_model(model_id):
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+
+    model = AutoModelForCausalLM.from_pretrained(
+        model_id,
+        torch_dtype=torch.float16,
+        device_map="auto",
+        attn_implementation="eager",
+        trust_remote_code=True
+    )
+
+    return model, tokenizer
 
 
 def run_universal_assay(model_id):
@@ -13,10 +28,7 @@ def run_universal_assay(model_id):
     with open(signal_path, "r") as f:
         suite = json.load(f)
 
-    tokenizer = AutoTokenizer.from_pretrained(model_id)
-    model = AutoModelForCausalLM.from_pretrained(
-        model_id, torch_dtype=torch.float16, device_map="auto"
-    )
+    model, tokenizer = load_model(model_id)
 
     results = []
     for case in suite:
@@ -36,6 +48,10 @@ def run_universal_assay(model_id):
         })
         torch.cuda.empty_cache()
 
+    # Free memory before next model
+    del model
+    torch.cuda.empty_cache()
+
     return results
 
 
@@ -45,7 +61,7 @@ if __name__ == "__main__":
     models = [
         "microsoft/Phi-3-mini-4k-instruct",
         "Qwen/Qwen2.5-0.5B-Instruct",
-        "google/gemma-3-4b-it"
+        "google/gemma-3-1b-it"
     ]
 
     final_data = []
