@@ -10,7 +10,6 @@ from functools import lru_cache
 
 @lru_cache(maxsize=1)
 def get_project_root() -> Path:
-    """Find project root by searching for marker file."""
     current = Path(__file__).resolve().parent
     for _ in range(10):
         if (current / "pyproject.toml").exists():

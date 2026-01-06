@@ -1,4 +1,3 @@
-import math
 import torch
 import json
 from quantum_sentinel.paths import TRACES_DIR
@@ -14,34 +13,21 @@ class ShannonObserver:
         self.task_id = task_id
         self.phase_log = []
 
-    def measure_uncertainty(self, logits: torch.FloatTensor):
-        """Calculates normalized Shannon Entropy (H)."""
-        # Handle -inf logits
+    @staticmethod
+    def measure_uncertainty(logits: torch.FloatTensor):
         if torch.all(logits == float('-inf')):
-            return 0.0  # No uncertainty if deadlocked
-
-        probs = torch.softmax(logits, dim=-1)
-
-        # Handle NaN
-        if torch.any(torch.isnan(probs)):
             return 0.0
 
-        log_probs = torch.log_softmax(logits, dim=-1)
-        h = -torch.sum(probs * log_probs, dim=-1).mean().item()
+        # Categorical distribution handles log_probs internally for better stability
+        dist = torch.distributions.Categorical(logits=logits)
+        h = dist.entropy().mean().item()
 
-        if math.isnan(h):
-            return 0.0
+        return h if not torch.isnan(torch.tensor(h)) else 0.0
 
-        return h
-
-    def log_transition(self, step, current_h, delta_h, limit):
+    def log_transition(self, step, uncertainty, velocity, limit):
         self.phase_log.append({
-            "step": step,
-            "uncertainty": round(current_h, 4),
-            "velocity": round(delta_h, 4),
-            "abs_velocity": round(abs(delta_h), 4),  # ← OPTIONAL
-            "threshold": round(limit, 4),
-            "is_violent": abs(delta_h) > limit
+            "step": step, "uncertainty": uncertainty,
+            "velocity": velocity, "limit": limit
         })
 
     def save_trace(self, model_name):
