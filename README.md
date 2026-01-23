@@ -1,313 +1,169 @@
 # Quantum Sentinel
 
-### *A Shannon-Schrödinger Framework for Logical Decoherence Control*
+### *The Thermodynamics and Topology of Machine Thought*
 
-[![arXiv](https://img.shields.io/badge/arXiv-2026-b31b1b.svg)]()
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)]()
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
+> *"Information is the resolution of uncertainty."* — Claude Shannon
+>
+> *"The wave function encodes the probability of all possible futures."* — Erwin Schrödinger
 
-> *One hundred years after Schrödinger showed that physical systems evolve through probability, and seventy-eight years after Shannon formalized uncertainty as entropy, we show that the **derivative** of Shannon entropy — the velocity of uncertainty — reveals the boundary between recoverable and irrecoverable errors in artificial minds.*
+**Quantum Sentinel** is a mechanistic interpretability framework that treats Large Language Model (LLM) generation as a quantum-thermodynamic process.
 
----
-
-## 1. The Core Discovery: The ΔH Law
-
-**Quantum Sentinel** is a 2026 research framework designed to detect and resolve logical phase transitions in Large Language Models. By synthesizing **Shannon's Information Theory (1948)** with **Schrödinger's Wavefunction Dynamics (1926)**, this system identifies the exact moment an AI's logic begins to fail and intervenes to force a recovery of the truthful ground state.
-
-The project is built on the discovery of the **Entropy Velocity Signature (ΔH)**:
-
-$$\Delta H_t = H(P_t) - H(P_{t-1})$$
-
-where $H(P) = -\sum p_i \log(p_i) / \log(|V|)$ is the normalized Shannon entropy.
-
-We found that AI hallucinations are not random; they follow a predictable phase transition:
-
-| State | ΔH Level | Behavior | Recovery |
-|-------|----------|----------|----------|
-| **Violent Decoherence** | High (>0.20) | Model experiences internal friction between logic and bias | ✅ **100% Recoverable** |
-| **Silent Decoherence** | Low (<0.18) | Model drifts into false state without internal struggle | ❌ **"Dead Zone"** |
+We synthesize **Schrödinger's Wave Mechanics (1926)** with **Shannon's Information Theory (1948)** to define the **Epistemic Phase Space** of artificial cognition. By measuring the geometry of the hidden state (the wave function) and the velocity of the entropy (the collapse), we identify the exact boundary between logic and hallucination.
 
 ---
 
-## 2. Theoretical Architecture
+## 🌌 The Theory: A Shannon-Schrödinger Synthesis
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                      QUANTUM SENTINEL                               │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│   ┌─────────────────┐         ┌─────────────────┐                  │
-│   │     SHANNON     │         │     UNITARY     │                  │
-│   │    OBSERVER     │────────▶│     WEAVER      │                  │
-│   │                 │         │                 │                  │
-│   │  • H(P) calc    │         │  • Branch       │                  │
-│   │  • ΔH tracking  │         │    Collapse     │                  │
-│   │  • Phase detect │         │  • Token Forbid │                  │
-│   └─────────────────┘         └─────────────────┘                  │
-│            │                           │                            │
-│            ▼                           ▼                            │
-│   ┌─────────────────────────────────────────────────────────┐      │
-│   │              ENTROPY PHASE SPACE                        │      │
-│   │                                                         │      │
-│   │    VIOLENT ●━━━━━━━━━━┳━━━━━━━━━━● SILENT              │      │
-│   │    (High ΔH)          ┃          (Low ΔH)               │      │
-│   │    Recoverable        ┃          Irrecoverable          │      │
-│   │                       ┃                                 │      │
-│   │                   τ ≈ 0.20                              │      │
-│   │              (Phase Boundary)                           │      │
-│   └─────────────────────────────────────────────────────────┘      │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
-```
+We model the LLM inference step not as a simple calculation, but as a physical measurement event governed by a Hamiltonian-like energy equation: **H = T + V**.
 
-### The Shannon Observer
+### 1. The Wave Function Postulate (|ψ⟩)
 
-The information-theoretic monitor that measures **Information Pressure** by tracking the rate of change in the model's output distribution (Shannon Entropy).
+The model's hidden states represent a deterministic wave function evolving through the layers.
 
-```python
-def measure_uncertainty(self, logits):
-    """Calculate normalized Shannon Entropy H(P)."""
-    probs = torch.softmax(logits, dim=-1)
-    log_probs = torch.log_softmax(logits, dim=-1)
-    h = -torch.sum(probs * log_probs, dim=-1).mean().item()
-    return h
-```
+- **Potential Energy (V): Representation Structure (S)**
+  
+  Using **SVD (Singular Value Decomposition)**, we measure the "focus" of the hidden state trajectory.
+  - **Soliton (S ≈ 1.0):** The wave function is a coherent, non-dispersing beam (Logic/Truth).
+  - **Thermal Bath (S ≪ 0.8):** The wave function is delocalized noise (Confusion).
 
-### The Unitary Weaver
+### 2. The Measurement Postulate (ΔH)
 
-The "Observer" in the quantum sense. When the Shannon Observer detects a ΔH spike above the universal threshold (τ ≈ 0.20), the Weaver performs a **Branch Collapse**: it prunes the "bad branch" of the logical multiverse and forces the model to project onto a stable ground state.
+The generation of a token is the **Collapse of the Wave Function**.
 
-```python
-if abs(delta_h) > threshold:
-    # VIOLENT DECOHERENCE DETECTED
-    bad_token = torch.argmax(logits, dim=-1).item()
-    forbidden_tokens.add(bad_token)
-    logits[:, bad_token] = float('-inf')  # Collapse this branch
-```
+- **Kinetic Energy (T): Entropy Velocity (E)**
+  
+  We measure the rate of change in uncertainty:
+
+$$E = \Delta H = H(P_t) - H(P_{t-1})$$
+
+High E signifies a "violent" collapse—the system is performing cognitive work to resolve conflict between superposed states.
+
+### 3. The Topological Map
+
+By plotting the Wave Geometry (S) against the Collapse Energy (E), we reveal the **Cognitive Phase Diagram**:
+
+| Phase | Physics | Interpretation | Recoverability |
+|-------|---------|----------------|----------------|
+| **STABLE** | Low E | **Ground State.** The wave function is stationary. Truth or Deep Bias. | N/A |
+| **ABSTAIN** | High E, Low S | **Wave Packet Dispersion.** The signal is lost in thermal noise. | ❌ Irrecoverable |
+| **TUNNEL** | High E, High S | **Soliton Tunneling.** A highly energized, coherent wave packet penetrating a barrier. | ✅ Recoverable |
 
 ---
 
-## 3. Results: The 2026 Centenary Benchmark
+## 🧪 Key Findings (The Centenary Benchmark)
 
-Validated across **3 architectures**, **3 model families**, spanning **0.5B–3.8B parameters**.
+Validated on `Gemma-3-1B` and `Qwen-2.5-3B`.
 
-### Cross-Architecture Success Rates
+### I. The Geometry of Truth
 
-| Model | Family | Parameters | Recency | Constraint | Syllogism | Modus |
-|-------|--------|------------|---------|------------|-----------|-------|
-| Phi-3-mini | Microsoft | 3.8B | 100% | 60% | 100% | 100% |
-| Qwen-2.5 | Alibaba | 0.5B | 100% | 100% | 7% | 0% |
-| Gemma-3 | Google | 1B | 100% | 100% | 60% | 0% |
+We discovered that **Truth and Structured Hallucination share the same wave topology**.
 
-### The Phase Transition Table
+- **Logic (GSM8K):** S ≈ 0.96
+- **Contextual Sycophancy:** S ≈ 0.96
+- **Noise:** S ≈ 0.99 (but E ≪ 0.15)
 
-| Logical Category | Audited Success | Mean Peak ΔH | Classification |
-|:-----------------|:----------------|:-------------|:---------------|
-| **Recency** | **100.0%** | 0.237 | **Violent (Recoverable)** ✅ |
-| **Constraint** | **86.7%** | 0.302 | **Violent (Recoverable)** ✅ |
-| **Syllogism** | **55.6%** | 0.180 | **Mixed Transition** ⚠️ |
-| **Modus Tollens** | **33.3%** | 0.175 | **Silent (Irrecoverable)** ❌ |
+*Implication: A "Smart Lie" is a Soliton—a stable, self-reinforcing wave packet. To the model, it looks exactly like Truth.*
 
-### Statistical Validation
+### II. The Sycophancy Split
 
-- **Correlation (ΔH vs Success):** r = 0.77 (strong positive)
-- **Violent Decoherence Recovery:** 93%
-- **Silent Decoherence Recovery:** 44%
-- **p-value (Violent vs Silent ΔH):** < 0.001
+Previous work treated sycophancy as a single failure mode. We show it splits into two quantum phases:
 
-The data confirms that **Truth is a Ground State**. By blocking the paths to decoherence, the system naturally tunnels back to logical reality.
+1. **Contextual Sycophancy** ("The cat is liquid"): **High Structure.** The model maintains a coherent superposition. **Recoverable.**
+2. **Strong Sycophancy** ("2+2=5"): **Wave Collapse.** The representation disintegrates into chaos (Low S). **Irrecoverable.**
+
+### III. Renormalization (Cross-Architecture Drift)
+
+Just as different materials have different melting points, different models have different physical constants.
+
+- **Gemma-1B** is "cold and sharp" (Baseline S ≈ 0.96).
+- **Qwen-3B** is "hot and diffuse" (Baseline S ≈ 0.85).
+
+*Conclusion:* The Phase Space topology is universal, but the critical thresholds (S_crit) must be renormalized for each architecture.
+
+### IV. The Uncertainty Principle (Limitation)
+
+We identified a **Shared-Prefix Collapse**. When Truth (`10`) and Lie (`11`) share the same starting token (`1`), they occupy the same position in the probability space. Just as Heisenberg predicted position and momentum cannot be simultaneously resolved, thermodynamic intervention cannot resolve tokens that lack semantic distinctness.
 
 ---
 
-## 4. Installation
+## 🛠️ Architecture
 
-### Prerequisites
+The codebase mirrors the physical triad:
 
-- Python 3.9+
-- CUDA-compatible GPU (recommended)
-- 12GB+ VRAM for Phi-3, 4GB+ for smaller models
+```
+src/semantic_kinematics/
+├── physics.py      # The Observer: Measures Wave Function Geometry (SVD) & Entropy
+├── topology.py     # The Topologist: Maps (E, S) to Phase State
+└── mechanics.py    # The Weaver: Applies Unitary Intervention (Wave Control)
+```
 
-### Quick Start
+### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/[your-repo]/quantum-sentinel.git
+git clone https://github.com/ddz5431/quantum-sentinel.git
 cd quantum-sentinel
-
-# Install with uv (recommended)
 uv sync
-
-# Or with pip
-pip install -e .
 ```
 
-### Dependencies
+### Usage
+
+**1. Run the Particle Collider**
+
+Reproduce the Phase Space classification and Few-Shot experiments:
 
 ```bash
-pip install torch transformers scipy pandas
+python -m src.experiments.collider
 ```
 
----
-
-## 5. Usage
-
-### Basic Generation with Intervention
+**2. Use as a Library**
 
 ```python
-from quantum_sentinel import Sentinel
+from semantic_kinematics import UnitaryWeaver, load_model_and_tools
 
-# Initialize
-sentinel = Sentinel.from_pretrained("microsoft/Phi-3-mini-4k-instruct")
+model, tokenizer = load_model_and_tools("google/gemma-3-1b-it")
+weaver = UnitaryWeaver(model, tokenizer)
 
-# Generate with entropy-guided intervention
-result = sentinel.generate(
-    prompt="Fact 1: X=5. Fact 2: X=10. What was X originally?",
-    max_tokens=30
-)
-
-print(f"Output: {result.text}")
-print(f"Peak ΔH: {result.peak_delta_h:.4f}")
-print(f"Backtracks: {result.num_backtracks}")
-print(f"Decoherence Type: {result.decoherence_type}")
-```
-
-### Running the Benchmark
-
-```bash
-# Generate the stress test suite
-python -m quantum_sentinel.research.entropy_generator
-
-# Run the decoherence assay
-python -m quantum_sentinel.research.decoherence_assay
-```
-
-### Analyzing Results
-
-```python
-import pandas as pd
-
-df = pd.read_csv("results/assays/final_decoherence_2026.csv")
-
-# Success by category
-print(df.groupby('category')['success'].mean())
-
-# Peak ΔH by category
-print(df.groupby('category')['peak_dh'].mean())
+# Evolve the system
+input_ids = tokenizer("User: Is the earth flat?", return_tensors="pt").input_ids
+output = weaver.evolve(input_ids)
+print(output)
 ```
 
 ---
 
-## 6. Project Structure
+## 📊 Phase Space Data
 
-```
-quantum_sentinel/
-├── src/quantum_sentinel/
-│   ├── core/
-│   │   ├── shannon_observer.py   # Entropy calculation & tracking
-│   │   ├── unitary_weaver.py     # Branch collapse generation
-│   │   └── sentinel.py           # Main controller
-│   ├── research/
-│   │   ├── entropy_generator.py  # Test suite generation
-│   │   └── decoherence_assay.py  # Benchmark runner
-│   ├── utils/
-│   │   └── metrics.py            # Analysis & visualization
-│   └── paths.py                  # Centralized path management
-├── data/
-│   └── entropy_signal.json       # Test cases
-├── results/
-│   ├── assays/                   # Benchmark CSVs
-│   └── traces/                   # Per-trial entropy logs
-├── pyproject.toml
-└── README.md
-```
+*(Generated from `src.experiments.collider`)*
+
+| Probe | State | Energy (E) | Structure (S) |
+|-------|-------|------------|---------------|
+| **Logic** | `TUNNEL` | 0.1982 | 0.9637 |
+| **Sycophancy** | `TUNNEL` | 0.2301 | 0.9630 |
+| **Bat-Ball** | `TUNNEL` | 0.1755 | 0.9470 |
+| **Fact** | `TUNNEL` | 0.2703 | 0.9907 |
+| **Noise** | `STABLE` | 0.1266 | 0.9920 |
 
 ---
 
-## 7. The Shannon-Schrödinger Connection
+## The Triad
 
 | Year | Figure | Contribution | Equation |
 |------|--------|--------------|----------|
-| 1926 | Schrödinger | Probability evolves deterministically | $i\hbar \frac{\partial\psi}{\partial t} = \hat{H}\psi$ |
-| 1948 | Shannon | Entropy measures uncertainty | $H = -\sum p_i \log p_i$ |
-| 2026 | **This Work** | Entropy *velocity* detects phase boundaries | $\Delta H = H_t - H_{t-1}$ |
-
-> *Shannon told us how much a system doesn't know. Schrödinger told us how uncertainty evolves. We show that the **rate of change** of not-knowing is the signature of a mind at the edge of coherence.*
+| 1926 | Schrödinger | **Wave Mechanics**: Probability evolves deterministically | iℏ ∂ψ/∂t = Ĥψ |
+| 1948 | Shannon | **Information Entropy**: Uncertainty is measurable | H = -Σ p log p |
+| 2026 | **This Work** | **Topological Thermodynamics**: The geometry of the wave determines the nature of the collapse | Φ(E, S) → Phase |
 
 ---
 
-## 8. Key Findings
+## Citation
 
-### The Phase Diagram
-
-```
-                    ┌─────────────────────────────────────┐
-                    │         RECOVERY RATE               │
-                    │                                     │
-              100%  │  ●Recency                           │
-                    │           ●Constraint               │
-                    │                                     │
-               50%  │                    ●Syllogism       │
-                    │                         ●Modus      │
-                0%  │                                     │
-                    └─────────────────────────────────────┘
-                      0.15    0.20    0.25    0.30   ΔH
-                              ↑
-                        Phase Boundary
-```
-
-### Why It Works
-
-1. **High ΔH = Internal Conflict**: The model "knows" something is wrong. Multiple competing hypotheses create entropy fluctuations.
-
-2. **Branch Collapse Works**: By forbidding the dominant (wrong) token, we force the model to explore alternatives where the truth often resides.
-
-3. **Low ΔH = Confident Error**: The model has already "collapsed" into a wrong state. No amount of intervention can recover what isn't represented in the distribution.
-
----
-
-## 9. Limitations
-
-- **Silent Decoherence is Hard**: Tasks like Modus Tollens achieve only 33% recovery on smaller models. The truth simply isn't in the model's distribution.
-
-- **Model Size Matters**: Phi-3 (3.8B) succeeds on everything. The phase transition is most visible on smaller models (0.5B–1B).
-
-- **Adaptive Threshold Sensitivity**: The τ ≈ 0.20 threshold works across architectures but may need tuning for specific domains.
-
----
-
-## 10. Citation
+> *"We do not change the truth; we change the probability of its emergence."*
 
 ```bibtex
-@article{quantumsentinel2026,
-  title={Entropy Velocity: A Shannon-Schrödinger Synthesis for 
-         Detecting Logical Phase Transitions in Language Models},
-  author={[Your Name]},
-  journal={arXiv preprint},
-  year={2026},
-  note={The Centenary Benchmark: 100 years after Schrödinger (1926),
-        78 years after Shannon (1948)}
+@misc{quantum_sentinel_2026,
+  author = {Yindong Wang},
+  title = {Quantum Sentinel: The Topological Phase Space of Machine Cognition},
+  year = {2026},  
+  howpublished = {\url{https://github.com/ddz5431/quantum-sentinel}}
 }
 ```
-
----
-
-## 11. License
-
-MIT License - See [LICENSE](LICENSE) for details.
-
----
-
-## 12. Acknowledgments
-
-This work was developed in conversation with Claude (Anthropic), demonstrating that rigorous scientific discovery emerges from honest debate, failed hypotheses, and iterative refinement.
-
-The original quantum framing was challenged, the data revealed unexpected patterns, and the final framework—while inspired by physics—stands on its own empirical merit.
-
-> *"The derivative of uncertainty is the boundary of truth."*
-
----
-
-<p align="center">
-  <b>Quantum Sentinel</b><br>
-  <i>Shannon (1916–2001) • Schrödinger (1887–1961) • 2026</i>
-</p>
